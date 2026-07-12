@@ -16,12 +16,12 @@ html {
 }
 
 body {
-    background-color: var(--bg);
-    color: var(--text);
+    background-color: #060913 !important; /* Forces the deep dark tech background */
+    color: #f3f4f6 !important;            /* Forces the text to stay light gray */
     font-family: system-ui, -apple-system, sans-serif;
     margin: 0;
     overflow-x: hidden;
-    padding-top: 70px; /* Space so content doesn't hide under fixed navbar */
+    padding-top: 70px;
 }
 
 /* Ambient background glow */
