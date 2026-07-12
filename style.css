@@ -339,25 +339,25 @@ li {
     outline: none;
     border-color: var(--accent);
 }
-
 .submit-btn {
-    background-color: var(--accent) !important;
-    color: #030712 !important; /* Forces the text to be sharp, visible dark navy */
+    background-color: #00d2ff !important; /* Hardcoded neon cyan background */
+    color: #030712 !important;            /* Solid dark readable text color */
     padding: 14px 28px;
     border: none;
     border-radius: 8px;
-    font-weight: 700 !important; /* Makes the button text bold */
+    font-weight: 700 !important;          /* Strong bold text */
     font-size: 1rem;
     cursor: pointer;
     align-self: flex-start;
     transition: all 0.3s ease;
+    display: inline-block;                 /* Guarantees structural visibility */
 }
 
 .submit-btn:hover {
     transform: scale(1.03);
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-    background-color: #ffffff !important; /* Button turns bright white on hover */
-    color: #030712 !important;            /* Text stays readable dark navy */
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
+    background-color: #ffffff !important; /* Smooth color shift to clean white */
+    color: #030712 !important;            /* Keeps text completely readable */
 }
 /* Premium Resume Download Button */
 .download-btn {
