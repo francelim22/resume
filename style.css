@@ -1,0 +1,400 @@
+### Step 2: Replace Your Entire `style.css`
+Open your `style.css` file, delete everything inside it, and paste this configuration to style the new navigation menu and layout rules:
+
+```css
+:root {
+    --bg: #060913;
+    --card-bg: #0d1326;
+    --accent: #00d2ff;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+    --border: #1e293b;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    padding-top: 70px; /* Space so content doesn't hide under fixed navbar */
+}
+
+/* Ambient background glow */
+.bg-glow {
+    position: fixed;
+    top: -25%;
+    left: -25%;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(0,210,255,0.04) 0%, transparent 55%);
+    z-index: -1;
+    animation: floatGlow 25s infinite linear;
+}
+
+@keyframes floatGlow {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(3%, 4%); }
+    100% { transform: translate(0, 0); }
+}
+
+/* 1. Sticky Glass Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: rgba(6, 9, 19, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 900px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.nav-logo {
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.4rem;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+/* Hero Header Elements */
+.hero {
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.glitch-text {
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Typewriter cursor blinking animation */
+.subtitle {
+    color: var(--accent);
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    margin: 15px 0;
+    font-weight: 600;
+}
+
+.cursor {
+    animation: blink 0.7s infinite;
+    margin-left: 3px;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.contact-info {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.contact-info a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+/* Container Structure */
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 20px 100px 20px;
+}
+
+.reveal-section {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-bottom: 90px;
+}
+
+.reveal-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    color: #fff;
+    margin-bottom: 35px;
+}
+
+/* Story Typography styling */
+.story-box p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* 3. Tech Stack Progress Bars Styling */
+.skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.skill-progress-box {
+    width: 100%;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.skill-percent {
+    color: var(--accent);
+}
+
+.progress-bg {
+    width: 100%;
+    height: 8px;
+    background: #111726;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%; /* Fills dynamically via JavaScript intersection */
+    height: 100%;
+    background: linear-gradient(90deg, #0088ff, var(--accent));
+    border-radius: 4px;
+    transition: width 1.5s cubic-bezier(0.1, 1, 0.1, 1);
+}
+
+/* Skills Grid cards styling */
+.skills-grid, .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.skills-card, .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+}
+
+.skills-card h3, .project-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.skills-card p, .project-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.skills-card:hover, .project-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.08);
+}
+
+/* Timeline Components */
+.timeline-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    opacity: 0;
+    transform: scale(0.97);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-card.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.timeline-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.12);
+    transform: translateY(-3px);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.date {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.company {
+    margin: 5px 0 15px 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+ul {
+    padding-left: 18px;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+    color: #cbd5e1;
+}
+
+.project-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+/* Contact Form Elements */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 14px;
+    background: #090d16;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.submit-btn {
+    background: var(--accent);
+    color: #030712;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+}
+
+/* Premium Resume Download Button */
+.download-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 24px;
+    background-color: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.download-btn:hover {
+    background-color: var(--accent);
+    color: #060913; /* Swaps text color to match background */
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+    transform: translateY(-2px);
+}
+.profile-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%; /* Makes it a perfect circle */
+    border: 3px solid var(--accent); /* Adds your neon blue border */
+    object-fit: cover;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); /* Soft neon glow */
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Micro-interaction: Photo lifts and glows more when hovered */
+.profile-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+    border-color: #fff; /* Border turns white on hover */
+}
